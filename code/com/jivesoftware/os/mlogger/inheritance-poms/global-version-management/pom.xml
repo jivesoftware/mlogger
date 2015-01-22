@@ -10,8 +10,24 @@
     </parent>
     <artifactId>global-version-management</artifactId>
     <packaging>pom</packaging>
+    <properties>
+        <jive-utils-version>0.61</jive-utils-version>
+    </properties>
     <dependencyManagement>
         <dependencies>
+            
+            <dependency>
+                <groupId>com.jivesoftware.os.mlogger</groupId>
+                <artifactId>core</artifactId>
+                <version>0.3-SNAPSHOT</version>
+            </dependency>
+            
+            <dependency>
+                <groupId>com.jivesoftware.os.jive.utils</groupId>
+                <artifactId>merlin-config</artifactId>
+                <version>${jive-utils-version}</version>
+            </dependency>
+        
             <dependency>
                 <groupId>commons-lang</groupId>
                 <artifactId>commons-lang</artifactId>
