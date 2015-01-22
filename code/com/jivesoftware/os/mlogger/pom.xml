@@ -15,6 +15,5 @@
     <modules>
         <module>inheritance-poms</module>
         <module>core</module>
-        <module>health</module>
     </modules>
 </project>
