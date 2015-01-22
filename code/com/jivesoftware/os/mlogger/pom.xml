@@ -4,8 +4,14 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>com.jivesoftware.os.jive</groupId>
     <artifactId>mlogger</artifactId>
-    <version>0.1-SNAPSHOT</version>
+    <version>0.2-SNAPSHOT</version>
     <packaging>pom</packaging>
+    <parent>
+        <groupId>com.jivesoftware.os.mlogger.inheritance.poms</groupId>
+        <artifactId>global-repo-management</artifactId>
+        <version>0.2-SNAPSHOT</version>
+        <relativePath>inheritance-poms/global-repo-management/pom.xml</relativePath>
+    </parent>
     <modules>
         <module>inheritance-poms</module>
         <module>core</module>
