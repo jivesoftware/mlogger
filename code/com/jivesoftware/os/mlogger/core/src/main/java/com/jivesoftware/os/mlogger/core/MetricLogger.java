@@ -839,6 +839,10 @@ public final class MetricLogger {
         countersAndTimers.counter(type, name).set(value);
     }
 
+    public void set(ValueType type, String name, long value, String tenant) {
+        countersAndTimers.getTenantMetric(tenant).counter(type, name).set(value);
+    }
+
     /**
      * Same as set(ValueType type, String name, long value) except it uses an AtomicLong. This is notably slower than the simple set(ValueType type, String
      * name, long value) form. Only use if you absolutely have to have an accurate count.
@@ -849,6 +853,10 @@ public final class MetricLogger {
      */
     public void setAtomic(ValueType type, String name, long value) {
         countersAndTimers.atomicCounter(type, name).set(value);
+    }
+
+    public void setAtomic(ValueType type, String name, long value, String tenant) {
+        countersAndTimers.getTenantMetric(tenant).atomicCounter(type, name).set(value);
     }
 
     /**
@@ -863,6 +871,10 @@ public final class MetricLogger {
      */
     public void inc(String name) {
         countersAndTimers.counter(ValueType.COUNT, name).inc();
+    }
+
+    public void inc(String name, String tenant) {
+        countersAndTimers.getTenantMetric(tenant).counter(ValueType.COUNT, name).inc();
     }
 
     /**
@@ -880,6 +892,10 @@ public final class MetricLogger {
         countersAndTimers.counter(ValueType.COUNT, name).inc(amount);
     }
 
+    public void inc(String name, long amount, String tenant) {
+        countersAndTimers.getTenantMetric(tenant).counter(ValueType.COUNT, name).inc(amount);
+    }
+
     /**
      * Opposite of {@link #inc(String name)}
      *
@@ -887,6 +903,10 @@ public final class MetricLogger {
      */
     public void dec(String name) {
         countersAndTimers.counter(ValueType.COUNT, name).dec();
+    }
+
+    public void dec(String name, String tenant) {
+        countersAndTimers.getTenantMetric(tenant).counter(ValueType.COUNT, name).dec();
     }
 
     /**
@@ -897,6 +917,10 @@ public final class MetricLogger {
      */
     public void dec(String name, long amount) {
         countersAndTimers.counter(ValueType.COUNT, name).dec(amount);
+    }
+
+    public void dec(String name, long amount, String tenant) {
+        countersAndTimers.getTenantMetric(tenant).counter(ValueType.COUNT, name).dec(amount);
     }
 
     /**
@@ -911,6 +935,10 @@ public final class MetricLogger {
      */
     public void incAtomic(String name) {
         countersAndTimers.atomicCounter(ValueType.COUNT, name).inc();
+    }
+
+    public void incAtomic(String name, String tenant) {
+        countersAndTimers.getTenantMetric(tenant).atomicCounter(ValueType.COUNT, name).inc();
     }
 
     /**
@@ -928,6 +956,10 @@ public final class MetricLogger {
         countersAndTimers.atomicCounter(ValueType.COUNT, name).inc(amount);
     }
 
+    public void incAtomic(String name, long amount, String tenant) {
+        countersAndTimers.getTenantMetric(tenant).atomicCounter(ValueType.COUNT, name).inc(amount);
+    }
+
     /**
      * Opposite of {@link #incAtomic(String name)}
      *
@@ -935,6 +967,10 @@ public final class MetricLogger {
      */
     public void decAtomic(String name) {
         countersAndTimers.atomicCounter(ValueType.COUNT, name).dec();
+    }
+
+    public void decAtomic(String name, String tenant) {
+        countersAndTimers.getTenantMetric(tenant).atomicCounter(ValueType.COUNT, name).dec();
     }
 
     /**
@@ -945,6 +981,10 @@ public final class MetricLogger {
      */
     public void decAtomic(String name, long amount) {
         countersAndTimers.atomicCounter(ValueType.COUNT, name).dec(amount);
+    }
+
+    public void decAtomic(String name, long amount, String tenant) {
+        countersAndTimers.getTenantMetric(tenant).atomicCounter(ValueType.COUNT, name).dec(amount);
     }
 
     /**
@@ -966,6 +1006,10 @@ public final class MetricLogger {
         countersAndTimers.startTimer(name);
     }
 
+    public void startTenantTimer(String name, String tenant) {
+        countersAndTimers.getTenantMetric(tenant).startTimer(name);
+    }
+
     /**
      * Stops a named timer. See: {@link #startTimer(String name)} This is a convenience method that delegates to
      * {@link #stopTimer(java.lang.String, java.lang.String)}
@@ -975,6 +1019,10 @@ public final class MetricLogger {
      */
     public long stopTimer(String name) {
         return countersAndTimers.stopTimer(name, name);
+    }
+
+    public void stopTenantTimer(String name, String tenant) {
+        countersAndTimers.getTenantMetric(tenant).stopTimer(name, name);
     }
 
     /**
@@ -996,6 +1044,10 @@ public final class MetricLogger {
         countersAndTimers.startNanoTimer(name);
     }
 
+    public void startTenantNanoTimer(String name, String tenant) {
+        countersAndTimers.getTenantMetric(tenant).startNanoTimer(name);
+    }
+
     /**
      * Stops a named timer. See: {@link #startTimer(String name)} This is a convenience method that delegates to
      * {@link #stopTimer(java.lang.String, java.lang.String)}
@@ -1005,6 +1057,10 @@ public final class MetricLogger {
      */
     public long stopNanoTimer(String name) {
         return countersAndTimers.stopNanoTimer(name, name);
+    }
+
+    public void stopTenantNanoTimer(String name, String tenant) {
+        countersAndTimers.getTenantMetric(tenant).stopNanoTimer(name, name);
     }
 
     /**
@@ -1023,65 +1079,8 @@ public final class MetricLogger {
         return countersAndTimers.stopTimer(name, recordedName);
     }
 
-    /**
-     * Start named timed operation and return {@link TimedOperation} for additional functionallity.<br/>
-     * The name parameter is combined with the logger name so there is no need to excplicitly provide it.<br/> {@link TimedOperation} is {@link AutoCloseable}
-     * to it can be used inside try block.<br/>
-     *
-     * @param name the name of the named timed operation
-     * @return new operation object
-     */
-    public TimedOperation startTimedOperation(String name) {
-        return new TimedOperation(this, name);
+    public long stopTenantTimer(String name, String recordedName, String tenant) {
+        return countersAndTimers.getTenantMetric(tenant).stopTimer(name, recordedName);
     }
 
-    /**
-     * Start named timed operation and return {@link TimedOperation} for additional functionallity.<br/>
-     * The name parameter is combined with the logger name so there is no need to excplicitly provide it.<br/> {@link TimedOperation} is {@link AutoCloseable}
-     * to it can be used inside try block.<br/>
-     *
-     * @param name the name of the named timed operation
-     * @param initialStatus the initial status to set on the operation.
-     * @return new operation object
-     */
-    public TimedOperation startTimedOperation(String name, TimedOperation.Status initialStatus) {
-        return new TimedOperation(this, name, initialStatus);
-    }
-
-    /**
-     * Start named timed operation and return {@link TimedOperation} for additional functionallity.<br/>
-     * The name parameter is combined with the logger name so there is no need to excplicitly provide it.<br/> {@link TimedOperation} is {@link AutoCloseable}
-     * to it can be used inside try block.<br/>
-     *
-     * @param name the name of the named timed operation
-     * @param tenantId The tenant that is executing the operation.
-     * @return new operation object
-     */
-    public TimedOperation startTimedOperation(String name, Object tenantId) {
-        return new TimedOperation(this, name, tenantId);
-    }
-
-    /**
-     * Start named timed operation and return {@link TimedOperation} for additional functionallity.<br/>
-     * The name parameter is combined with the logger name so there is no need to excplicitly provide it.<br/> {@link TimedOperation} is {@link AutoCloseable}
-     * to it can be used inside try block.<br/>
-     *
-     * @param name the name of the named timed operation
-     * @param tenantId The tenant that is executing the operation.
-     * @param initialStatus the initial status to set on the operation.
-     * @return new operation object
-     */
-    public TimedOperation startTimedOperation(String name, Object tenantId, TimedOperation.Status initialStatus) {
-        return new TimedOperation(this, name, tenantId, initialStatus);
-    }
-
-    /**
-     * Log a Metrics Event
-     *
-     * @param name Name of the metric. Try to keep this unique: [jira project]_[feature name]_[event name]
-     * @return Metric object which you'll put metric properties onto, and then send().
-     */
-    public Metric metric(String name) {
-        return MetricEvent.metric(name);
-    }
 }

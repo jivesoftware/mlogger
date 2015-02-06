@@ -75,14 +75,31 @@ public final class CountersAndTimers {
     private final ConcurrentHashMap<String, AtomicCounter> atomicCounters = new ConcurrentHashMap<>();
     private final ConcurrentHashMap<String, Long> startTimes = new ConcurrentHashMap<>();
     private final ConcurrentHashMap<String, Timer> timers = new ConcurrentHashMap<>();
-    private final String className;
+    private final String name;
+    private final ConcurrentHashMap<String, CountersAndTimers> tenantSpecifcMetric = new ConcurrentHashMap<>();
 
-    private CountersAndTimers(String className) {
-        this.className = className;
+    private CountersAndTimers(String name) {
+        this.name = name;
     }
 
-    public String getLoggerName() {
-        return className;
+    public String getName() {
+        return name;
+    }
+
+    public Collection<CountersAndTimers> getAllTenantSpecficMetrics() {
+        return tenantSpecifcMetric.values();
+    }
+
+    public CountersAndTimers getTenantMetric(String tenant) {
+        CountersAndTimers got = tenantSpecifcMetric.get(tenant);
+        if (got == null) {
+            got = new CountersAndTimers(name + ">tenant>" + tenant);
+            CountersAndTimers had = tenantSpecifcMetric.putIfAbsent(tenant, got);
+            if (had != null) {
+                got = had;
+            }
+        }
+        return got;
     }
 
     public Set<Entry<String, Counter>> getCounters() {
@@ -106,7 +123,7 @@ public final class CountersAndTimers {
             if (originalCounter != null) {
                 return originalCounter;
             }
-            register(className + ">" + key, counter);
+            register(name + ">" + key, counter);
         }
         return counter;
     }
@@ -120,7 +137,7 @@ public final class CountersAndTimers {
             if (originalCounter != null) {
                 return originalCounter;
             }
-            register(className + ">" + key, counter);
+            register(name + ">" + key, counter);
         }
         return counter;
     }
@@ -150,7 +167,7 @@ public final class CountersAndTimers {
             timer = new Timer(5000);
             Timer exisitingTimer = timers.putIfAbsent(recordedKey, timer);
             if (exisitingTimer == null) {
-                register(className + ">" + recordedKey, timer);
+                register(name + ">" + recordedKey, timer);
             } else {
                 timer = exisitingTimer;
             }
@@ -172,11 +189,11 @@ public final class CountersAndTimers {
     }
 
     /**
-
-     @param key
-     @param recordedKey
-     @return
-     @deprecated Suggested you use stopAndGetTimer.
+     *
+     * @param key
+     * @param recordedKey
+     * @return
+     * @deprecated Suggested you use stopAndGetTimer.
      */
     @Deprecated
     public long stopTimer(String key, String recordedKey) {
@@ -197,7 +214,7 @@ public final class CountersAndTimers {
             timer = new Timer(sampleWindowSize);
             Timer exisitingTimer = timers.putIfAbsent(recordedKey, timer);
             if (exisitingTimer == null) {
-                register(className + ">" + recordedKey, timer);
+                register(name + ">" + recordedKey, timer);
             } else {
                 timer = exisitingTimer;
             }
@@ -241,7 +258,7 @@ public final class CountersAndTimers {
         }
 
         Class clazz = mbean.getClass();
-        String objectName = "ServiceStatus:type=" + clazz.getSimpleName() + "," + sb.toString();
+        String objectName = "service.metrics:type=" + clazz.getSimpleName() + "," + sb.toString();
 
         logger.debug("registering bean: " + objectName);
 
