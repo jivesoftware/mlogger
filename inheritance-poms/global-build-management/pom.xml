@@ -16,30 +16,11 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>
 
-    <build>
-        <!-- This section defines the plugins to run by default for all children projects.
-        Note that default maven plugins don't need to be specified (like maven-compiler-plugin). -->
-<!--        <plugins>
-            <plugin>
-                <groupId>com.jivesoftware.jive.build.configuration.maven.plugins</groupId>
-                <artifactId>module-name-alignment-plugin</artifactId>
-            </plugin>
-            <plugin>
-                <groupId>com.jivesoftware.jive.build.configuration.maven.plugins</groupId>
-                <artifactId>package-name-alignment-plugin</artifactId>
-            </plugin>
-        </plugins>-->
-    </build>
     <profiles>
         <profile>
             <id>checks</id>
             <build>
                 <plugins>
-                    <!--Makes sure nobody depends on SNAPSHOTs.-->
-<!--                    <plugin>
-                        <groupId>com.jivesoftware.jive.build.configuration.maven.plugins</groupId>
-                        <artifactId>no-snapshots-plugin</artifactId>
-                    </plugin>-->
                 </plugins>
             </build>
         </profile>
