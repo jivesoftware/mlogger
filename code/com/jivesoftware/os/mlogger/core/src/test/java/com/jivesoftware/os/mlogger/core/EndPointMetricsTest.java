@@ -33,12 +33,9 @@ public class EndPointMetricsTest {
         MetricLogger logger = MetricLoggerFactory.getLogger("fooEndPointMetricsTest");
         EndPointMetrics countAndTime = new EndPointMetrics("bar", logger);
 
-        countAndTime.call(new Callable<String>() {
-            @Override
-            public String call() throws Exception {
-                Thread.sleep(500);
-                return "done";
-            }
+        countAndTime.call(() -> {
+            Thread.sleep(500);
+            return "done";
         });
 
         CountersAndTimers countersAndTimers = CountersAndTimers.getOrCreate("foo");

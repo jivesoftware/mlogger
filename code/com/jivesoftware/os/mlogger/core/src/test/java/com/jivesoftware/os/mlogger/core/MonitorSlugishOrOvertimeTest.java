@@ -38,12 +38,9 @@ public class MonitorSlugishOrOvertimeTest {
         MonitorSlugishOrOvertime monitorSlugishOrOvertime = new MonitorSlugishOrOvertime(logger, "bar", TimeUnit.MILLISECONDS,
                 sluggishWhenMoreThanN, overtimeWhenMoreThanN);
 
-        monitorSlugishOrOvertime.call(new Callable<String>() {
-            @Override
-            public String call() throws Exception {
-                Thread.sleep(10);
-                return "done";
-            }
+        monitorSlugishOrOvertime.call(() -> {
+            Thread.sleep(10);
+            return "done";
         });
 
         CountersAndTimers countersAndTimers = CountersAndTimers.getOrCreate("foo");
@@ -56,12 +53,9 @@ public class MonitorSlugishOrOvertimeTest {
             Assert.assertEquals(entry.getValue().getCount(), 1);
         }
 
-        monitorSlugishOrOvertime.call(new Callable<String>() {
-            @Override
-            public String call() throws Exception {
-                Thread.sleep(110);
-                return "done";
-            }
+        monitorSlugishOrOvertime.call(() -> {
+            Thread.sleep(110);
+            return "done";
         });
 
         counters = countersAndTimers.getCounters();
@@ -78,12 +72,9 @@ public class MonitorSlugishOrOvertimeTest {
         }
 
 
-        monitorSlugishOrOvertime.call(new Callable<String>() {
-            @Override
-            public String call() throws Exception {
-                Thread.sleep(210);
-                return "done";
-            }
+        monitorSlugishOrOvertime.call(() -> {
+            Thread.sleep(210);
+            return "done";
         });
 
         counters = countersAndTimers.getCounters();
