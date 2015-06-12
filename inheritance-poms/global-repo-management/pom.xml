@@ -6,13 +6,7 @@
     <version>0.10-SNAPSHOT</version>
     <packaging>pom</packaging>
 
-    <inceptionYear>2009</inceptionYear>
-    <organization>
-        <name>Jive Software</name>
-        <url>https://developers.jivesoftware.com</url>
-
-    </organization>
-    <url>https://developers.jivesoftware.com</url>
+    <inceptionYear>2013</inceptionYear>
     <licenses>
         <license>
             <name>Apache License, Version 2.0</name>
@@ -21,23 +15,19 @@
         </license>
     </licenses>
     <scm>
-        <connection>scm:git:ssh://github.com/jivesoftware/mlogger.git</connection>
-        <developerConnection>scm:git:git://git@github.com/jivesoftware/mlogger.git</developerConnection>
         <url>https://github.com/jivesoftware/mlogger</url>
-        <tag>HEAD</tag>
+        <connection>scm:git:git://github.com/jivesoftware/mlogger.git</connection>
+        <developerConnection>scm:git:git@github.com:jivesoftware/mlogger.git</developerConnection>
     </scm>
-    <repositories>
-        <repository>
-            <id>cloudera</id>
-            <url>https://repository.cloudera.com/artifactory/cloudera-repos/</url>
-        </repository>
-    </repositories>
     <distributionManagement>
         <repository>
             <id>modified-thirdparty</id>
             <name>Jive Internal Repository</name>
             <url>http://nexus-int.eng.jiveland.com/content/repositories/modified-thirdparty</url>
         </repository>
+        <snapshotRepository>
+            <id>snapshots</id>
+            <url>http://nexus-int-qa.eng.jiveland.com/content/repositories/snapshots</url>
+        </snapshotRepository>
     </distributionManagement>
-
 </project>

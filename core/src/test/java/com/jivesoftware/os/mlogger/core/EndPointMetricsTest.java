@@ -17,7 +17,6 @@ package com.jivesoftware.os.mlogger.core;
 
 import java.util.Map;
 import java.util.Set;
-import java.util.concurrent.Callable;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
