@@ -1,6 +1,6 @@
 package com.jivesoftware.os.mlogger.core;
 
-import java.util.LinkedHashMap;
+import com.googlecode.concurrentlinkedhashmap.ConcurrentLinkedHashMap;
 import java.util.Map;
 import java.util.concurrent.atomic.AtomicLong;
 
@@ -15,27 +15,15 @@ public final class BucketedCounter implements BucketedCounterMXBean {
 
     private final long bucketSize;
     private final int numberOfBuckets;
-    private final Buckets<Long, AtomicLong> bucketedCount;
-
-    public static class Buckets<K, V> extends LinkedHashMap<K, V> {
-
-        private final int capacity;
-
-        public Buckets(int capacity) {
-            super();    // insertion-ordered by default
-            this.capacity = capacity;
-        }
-
-        protected boolean removeEldestEntry(Map.Entry<K, V> eldest) {
-            return this.size() > capacity;
-        }
-    }
+    private final ConcurrentLinkedHashMap<Long, AtomicLong> bucketedCount;
 
     public BucketedCounter(ValueType type, long bucketSize, int numberOfBuckets) {
         this.type = type;
         this.bucketSize = bucketSize;
         this.numberOfBuckets = numberOfBuckets;
-        this.bucketedCount = new Buckets<Long, AtomicLong>(numberOfBuckets + 1);
+        this.bucketedCount = new ConcurrentLinkedHashMap.Builder<Long, AtomicLong>()
+                .maximumWeightedCapacity(numberOfBuckets + 1)
+                .build();
     }
 
     public String toJsonString() {
@@ -110,14 +98,7 @@ public final class BucketedCounter implements BucketedCounterMXBean {
         if (bucketValue != null) {
             bucketValue.addAndGet(amount);
         } else {
-            synchronized (this) {
-                bucketValue = bucketedCount.get(bucketKey);
-                if (bucketValue != null) {
-                    bucketValue.addAndGet(amount);
-                } else {
-                    bucketedCount.put(bucketKey, new AtomicLong(amount));
-                }
-            }
+            bucketedCount.put(bucketKey, new AtomicLong(amount));
         }
     }
 
