@@ -73,6 +73,7 @@ public final class CountersAndTimers {
     }
     private final ConcurrentHashMap<String, Counter> counters = new ConcurrentHashMap<>();
     private final ConcurrentHashMap<String, AtomicCounter> atomicCounters = new ConcurrentHashMap<>();
+    private final ConcurrentHashMap<String, BucketedCounter> bucketedCounters = new ConcurrentHashMap<>();
     private final ConcurrentHashMap<String, Long> startTimes = new ConcurrentHashMap<>();
     private final ConcurrentHashMap<String, Timer> timers = new ConcurrentHashMap<>();
     private final String name;
@@ -110,6 +111,10 @@ public final class CountersAndTimers {
         return atomicCounters.entrySet();
     }
 
+    public Set<Entry<String, BucketedCounter>> getBucketedCounters() {
+        return bucketedCounters.entrySet();
+    }
+
     public Set<Entry<String, Timer>> getTimers() {
         return timers.entrySet();
     }
@@ -134,6 +139,20 @@ public final class CountersAndTimers {
         if (counter == null) {
             counter = new AtomicCounter(type);
             AtomicCounter originalCounter = atomicCounters.putIfAbsent(key, counter);
+            if (originalCounter != null) {
+                return originalCounter;
+            }
+            register(name + ">" + key, counter);
+        }
+        return counter;
+    }
+
+    public BucketedCounter bucketedCounter(ValueType type, String key, long bucketSize, int numberOfBuckets) {
+        BucketedCounter counter = bucketedCounters.get(key);
+
+        if (counter == null) {
+            counter = new BucketedCounter(type, bucketSize, numberOfBuckets);
+            BucketedCounter originalCounter = bucketedCounters.putIfAbsent(key, counter);
             if (originalCounter != null) {
                 return originalCounter;
             }

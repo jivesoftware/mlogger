@@ -89,9 +89,12 @@ public final class MetricLogger {
     /**
      * Logs a message at Level.TRACE after having substituted the 'arg' into the 'messagePattern' at location designated by '{}'.
      *
-     * Example: String fieldName = "foo"; LOG.trace("fieldName:{}", fieldName);
+     * Example:
+     *      String fieldName = "foo";
+     *      LOG.trace("fieldName:{}", fieldName);
      *
-     * Yields: "fieldName:foo"
+     * Yields:
+     *      "fieldName:foo"
      *
      * @param messagePattern null is ok.
      * @param arg null is ok.
@@ -110,9 +113,13 @@ public final class MetricLogger {
     /**
      * Logs a message at Level.TRACE after having substituted the 'arg1' and 'arg2' into the 'messagePattern' at locations designated by '{}'s.
      *
-     * Example: String fieldName = "foo"; String value = "bar"; LOG.trace("fieldName:{}={}", fieldName, value);
+     * Example:
+     *      String fieldName = "foo";
+     *      String value = "bar";
+     *      LOG.trace("fieldName:{}={}", fieldName, value);
      *
-     * Yields: "fieldName:foo=bar"
+     * Yields:
+     *      "fieldName:foo=bar"
      *
      * @param messagePattern null is ok.
      * @param arg1 null is ok.
@@ -130,9 +137,13 @@ public final class MetricLogger {
     /**
      * Logs a message at Level.TRACE after having substituted the 'arg1' and 'arg2' into the 'messagePattern' at locations designated by '{}'s.
      *
-     * Example: String fieldName = "foo"; String value = "bar"; LOG.trace("fieldName:{}={}", fieldName, value);
+     * Example:
+     *      String fieldName = "foo";
+     *      String value = "bar";
+     *      LOG.trace("fieldName:{}={}", fieldName, value);
      *
-     * Yields: "fieldName:foo=bar"
+     * Yields:
+     *      "fieldName:foo=bar"
      *
      * @param messagePattern null is ok.
      * @param arg1 null is ok.
@@ -150,9 +161,13 @@ public final class MetricLogger {
     /**
      * Logs a message at Level.TRACE after having substituted the 'arg1' and 'arg2' into the 'messagePattern' at locations designated by '{}'s.
      *
-     * Example: String fieldName = "foo"; String value = "bar"; LOG.trace("fieldName:{}={}", fieldName, value);
+     * Example:
+     *      String fieldName = "foo";
+     *      String value = "bar";
+     *      LOG.trace("fieldName:{}={}", fieldName, value);
      *
-     * Yields: "fieldName:foo=bar"
+     * Yields:
+     *      "fieldName:foo=bar"
      *
      * @param messagePattern null is ok.
      * @param arg1 null is ok.
@@ -171,9 +186,13 @@ public final class MetricLogger {
      * Logs a message at Level.TRACE with an exception after having substituted the elements of 'argArray' into the 'messagePattern' at locations designated by
      * '{}'s.
      *
-     * Example: String fieldName = "foo"; String value = "bar"; LOG.trace("fieldName:{}={}", new Object[]{fieldName,value});
+     * Example:
+     *      String fieldName = "foo";
+     *      String value = "bar";
+     *      LOG.trace("fieldName:{}={}", new Object[]{fieldName,value});
      *
-     * Yields: "fieldName:foo=bar"
+     * Yields:
+     *      "fieldName:foo=bar"
      *
      * @param messagePattern null is ok.
      * @param argArray null is ok.
@@ -193,9 +212,13 @@ public final class MetricLogger {
     /**
      * Logs a message at Level.TRACE after having substituted the elements of 'argArray' into the 'messagePattern' at locations designated by '{}'s.
      *
-     * Example: String fieldName = "foo"; String value = "bar"; LOG.trace("fieldName:{}={}", new Object[]{fieldName,value});
+     * Example:
+     *      String fieldName = "foo";
+     *      String value = "bar";
+     *      LOG.trace("fieldName:{}={}", new Object[]{fieldName,value});
      *
-     * Yields: "fieldName:foo=bar"
+     * Yields:
+     *      "fieldName:foo=bar"
      *
      * @param messagePattern null is ok.
      * @param argArray null is ok.
@@ -252,9 +275,12 @@ public final class MetricLogger {
     /**
      * Logs a message at Level.DEBUG after having substituted the 'arg' into the 'messagePattern' at location designated by '{}'.
      *
-     * Example: String fieldName = "foo"; LOG.trace("fieldName:{}", fieldName);
+     * Example:
+     *      String fieldName = "foo";
+     *      LOG.trace("fieldName:{}", fieldName);
      *
-     * Yields: "fieldName:foo"
+     * Yields:
+     *      "fieldName:foo"
      *
      * @param messagePattern null is ok.
      * @param arg null is ok.
@@ -273,9 +299,13 @@ public final class MetricLogger {
     /**
      * Logs a message at Level.DEBUG after having substituted the 'arg1' and 'arg2' into the 'messagePattern' at locations designated by '{}'s.
      *
-     * Example: String fieldName = "foo"; String value = "bar"; LOG.trace("fieldName:{}={}", fieldName, value);
+     * Example:
+     *      String fieldName = "foo";
+     *      String value = "bar";
+     *      LOG.trace("fieldName:{}={}", fieldName, value);
      *
-     * Yields: "fieldName:foo=bar"
+     * Yields:
+     *      "fieldName:foo=bar"
      *
      * @param messagePattern null is ok.
      * @param arg1 null is ok.
@@ -318,9 +348,13 @@ public final class MetricLogger {
      * Logs a message at Level.DEBUG with an exception after having substituted the elements of 'argArray' into the 'messagePattern' at locations designated by
      * '{}'s.
      *
-     * Example: String fieldName = "foo"; String value = "bar"; LOG.trace("fieldName:{}={}", new Object[]{fieldName,value});
+     * Example:
+     *      String fieldName = "foo";
+     *      String value = "bar"; L
+     *      LOG.trace("fieldName:{}={}", new Object[]{fieldName,value});
      *
-     * Yields: "fieldName:foo=bar"
+     * Yields:
+     *      "fieldName:foo=bar"
      *
      * @param messagePattern null is ok.
      * @param argArray null is ok.
@@ -340,9 +374,13 @@ public final class MetricLogger {
     /**
      * Logs a message at Level.DEBUG after having substituted the elements of 'argArray' into the 'messagePattern' at locations designated by '{}'s.
      *
-     * Example: String fieldName = "foo"; String value = "bar"; LOG.trace("fieldName:{}={}", new Object[]{fieldName,value});
+     * Example:
+     *      String fieldName = "foo";
+     *      String value = "bar";
+     *      LOG.trace("fieldName:{}={}", new Object[]{fieldName,value});
      *
-     * Yields: "fieldName:foo=bar"
+     * Yields:
+     *      "fieldName:foo=bar"
      *
      * @param messagePattern null is ok.
      * @param argArray null is ok.
@@ -400,9 +438,12 @@ public final class MetricLogger {
     /**
      * Logs a message at Level.WARN after having substituted the 'arg' into the 'messagePattern' at location designated by '{}'.
      *
-     * Example: String fieldName = "foo"; LOG.trace("fieldName:{}", fieldName);
+     * Example:
+     *      String fieldName = "foo";
+     *      LOG.trace("fieldName:{}", fieldName);
      *
-     * Yields: "fieldName:foo"
+     * Yields:
+     *      "fieldName:foo"
      *
      * @param messagePattern null is ok.
      * @param arg null is ok.
@@ -422,9 +463,13 @@ public final class MetricLogger {
     /**
      * Logs a message at Level.WARN after having substituted the 'arg1' and 'arg2' into the 'messagePattern' at locations designated by '{}'s.
      *
-     * Example: String fieldName = "foo"; String value = "bar"; LOG.trace("fieldName:{}={}", fieldName, value);
+     * Example:
+     *      String fieldName = "foo";
+     *      String value = "bar";
+     *      LOG.trace("fieldName:{}={}", fieldName, value);
      *
-     * Yields: "fieldName:foo=bar"
+     * Yields:
+     *      "fieldName:foo=bar"
      *
      * @param messagePattern null is ok.
      * @param arg1 null is ok.
@@ -446,9 +491,13 @@ public final class MetricLogger {
      * Logs a message at Level.WARN with an exception after having substituted the elements of 'argArray' into the 'messagePattern' at locations designated by
      * '{}'s.
      *
-     * Example: String fieldName = "foo"; String value = "bar"; LOG.trace("fieldName:{}={}", new Object[]{fieldName,value});
+     * Example:
+     *      String fieldName = "foo";
+     *      String value = "bar";
+     *      LOG.trace("fieldName:{}={}", new Object[]{fieldName,value});
      *
-     * Yields: "fieldName:foo=bar"
+     * Yields:
+     *      "fieldName:foo=bar"
      *
      * @param messagePattern null is ok.
      * @param argArray null is ok.
@@ -469,9 +518,13 @@ public final class MetricLogger {
     /**
      * Logs a message at Level.WARN after having substituted the elements of 'argArray' into the 'messagePattern' at locations designated by '{}'s.
      *
-     * Example: String fieldName = "foo"; String value = "bar"; LOG.trace("fieldName:{}={}", new Object[]{fieldName,value});
+     * Example:
+     *      String fieldName = "foo";
+     *      String value = "bar";
+     *      LOG.trace("fieldName:{}={}", new Object[]{fieldName,value});
      *
-     * Yields: "fieldName:foo=bar"
+     * Yields:
+     *      "fieldName:foo=bar"
      *
      * @param messagePattern null is ok.
      * @param argArray null is ok.
@@ -531,9 +584,12 @@ public final class MetricLogger {
     /**
      * Logs a message at Level.INFO after having substituted the 'arg' into the 'messagePattern' at location designated by '{}'.
      *
-     * Example: String fieldName = "foo"; LOG.trace("fieldName:{}", fieldName);
+     * Example:
+     *      String fieldName = "foo";
+     *      LOG.trace("fieldName:{}", fieldName);
      *
-     * Yields: "fieldName:foo"
+     * Yields:
+     *      "fieldName:foo"
      *
      * @param messagePattern null is ok.
      * @param arg null is ok.
@@ -553,9 +609,13 @@ public final class MetricLogger {
     /**
      * Logs a message at Level.INFO after having substituted the 'arg1' and 'arg2' into the 'messagePattern' at locations designated by '{}'s.
      *
-     * Example: String fieldName = "foo"; String value = "bar"; LOG.trace("fieldName:{}={}", fieldName, value);
+     * Example:
+     *      String fieldName = "foo";
+     *      String value = "bar";
+     *      LOG.trace("fieldName:{}={}", fieldName, value);
      *
-     * Yields: "fieldName:foo=bar"
+     * Yields:
+     *      "fieldName:foo=bar"
      *
      * @param messagePattern null is ok.
      * @param arg1 null is ok.
@@ -577,9 +637,13 @@ public final class MetricLogger {
      * Logs a message at Level.INFO with an exception after having substituted the elements of 'argArray' into the 'messagePattern' at locations designated by
      * '{}'s.
      *
-     * Example: String fieldName = "foo"; String value = "bar"; LOG.trace("fieldName:{}={}", new Object[]{fieldName,value});
+     * Example:
+     *      String fieldName = "foo";
+     *      String value = "bar";
+     *      LOG.trace("fieldName:{}={}", new Object[]{fieldName,value});
      *
-     * Yields: "fieldName:foo=bar"
+     * Yields:
+     *      "fieldName:foo=bar"
      *
      * @param messagePattern null is ok.
      * @param argArray null is ok.
@@ -599,9 +663,13 @@ public final class MetricLogger {
     /**
      * Logs a message at Level.INFO after having substituted the elements of 'argArray' into the 'messagePattern' at locations designated by '{}'s.
      *
-     * Example: String fieldName = "foo"; String value = "bar"; LOG.trace("fieldName:{}={}", new Object[]{fieldName,value});
+     * Example:
+     *      String fieldName = "foo";
+     *      String value = "bar";
+     *      LOG.trace("fieldName:{}={}", new Object[]{fieldName,value});
      *
-     * Yields: "fieldName:foo=bar"
+     * Yields:
+     *      "fieldName:foo=bar"
      *
      * @param messagePattern null is ok.
      * @param argArray null is ok.
@@ -678,9 +746,12 @@ public final class MetricLogger {
     /**
      * Logs a message at Level.ERROR after having substituted the 'arg' into the 'messagePattern' at location designated by '{}'.
      *
-     * Example: String fieldName = "foo"; LOG.trace("fieldName:{}", fieldName);
+     * Example:
+     *      String fieldName = "foo";
+     *      LOG.trace("fieldName:{}", fieldName);
      *
-     * Yields: "fieldName:foo"
+     * Yields:
+     *      "fieldName:foo"
      *
      * @param messagePattern null is ok.
      * @param arg null is ok.
@@ -700,9 +771,13 @@ public final class MetricLogger {
     /**
      * Logs a message at Level.ERROR after having substituted the 'arg1' and 'arg2' into the 'messagePattern' at locations designated by '{}'s.
      *
-     * Example: String fieldName = "foo"; String value = "bar"; LOG.trace("fieldName:{}={}", fieldName, value);
+     * Example:
+     *      String fieldName = "foo";
+     *      String value = "bar";
+     *      LOG.trace("fieldName:{}={}", fieldName, value);
      *
-     * Yields: "fieldName:foo=bar"
+     * Yields:
+     *      "fieldName:foo=bar"
      *
      * @param messagePattern null is ok.
      * @param arg1 null is ok.
@@ -724,9 +799,13 @@ public final class MetricLogger {
      * Logs a message at Level.ERROR with an exception after having substituted the elements of 'argArray' into the 'messagePattern' at locations designated by
      * '{}'s.
      *
-     * Example: String fieldName = "foo"; String value = "bar"; LOG.trace("fieldName:{}={}", new Object[]{fieldName,value});
+     * Example:
+     *      String fieldName = "foo";
+     *      String value = "bar";
+     *      LOG.trace("fieldName:{}={}", new Object[]{fieldName,value});
      *
-     * Yields: "fieldName:foo=bar"
+     * Yields:
+     *      "fieldName:foo=bar"
      *
      * @param messagePattern null is ok.
      * @param argArray null is ok.
@@ -747,9 +826,13 @@ public final class MetricLogger {
     /**
      * Logs a message at Level.ERROR after having substituted the elements of 'argArray' into the 'messagePattern' at locations designated by '{}'s.
      *
-     * Example: String fieldName = "foo"; String value = "bar"; LOG.trace("fieldName:{}={}", new Object[]{fieldName,value});
+     * Example:
+     *      String fieldName = "foo";
+     *      String value = "bar";
+     *      LOG.trace("fieldName:{}={}", new Object[]{fieldName,value});
      *
-     * Yields: "fieldName:foo=bar"
+     * Yields:
+     *      "fieldName:foo=bar"
      *
      * @param messagePattern null is ok.
      * @param argArray null is ok.
@@ -769,9 +852,13 @@ public final class MetricLogger {
     /**
      * Logs a message at Level.ERROR after having substituted the elements of 'argArray' into the 'messagePattern' at locations designated by '{}'s.
      *
-     * Example: String fieldName = "foo"; String value = "bar"; LOG.trace("fieldName:{}={}", new Object[]{fieldName,value});
+     * Example:
+     *      String fieldName = "foo";
+     *      String value = "bar";
+     *      LOG.trace("fieldName:{}={}", new Object[]{fieldName,value});
      *
-     * Yields: "fieldName:foo=bar"
+     * Yields:
+     *      "fieldName:foo=bar"
      *
      * @param tags null is ok.
      * @param messagePattern null is ok.
@@ -826,10 +913,19 @@ public final class MetricLogger {
     /**
      * Allows you set the ValueType the name and the value for a specific metric.
      *
-     * Metric names can be organized hierarchically by using the greater than separator. For example: LOG.set(ValueType.COUNT, "foo>bar>a", 1);
-     * LOG.set(ValueType.COUNT, "foo>bar>b", 2); LOG.set(ValueType.COUNT, "foo>bazz>c", 3);
+     * Metric names can be organized hierarchically by using the greater than separator.
+     * For example:
+     *      LOG.set(ValueType.COUNT, "foo>bar>a", 1);
+     *      LOG.set(ValueType.COUNT, "foo>bar>b", 2);
+     *      LOG.set(ValueType.COUNT, "foo>bazz>c", 3);
      *
-     * Yields: foo |-- bar | |-- a = 1 | |-- b = 2 |-- baz | |-- c = 3
+     * Yields:
+     *      foo
+     *      |-- bar
+     *      |   |-- a = 1
+     *      |   |-- b = 2
+     *      |-- baz
+     *      |   |-- c = 3
      *
      * @param type null NOT ok.
      * @param name null NOT ok.
@@ -862,10 +958,19 @@ public final class MetricLogger {
     /**
      * Increments a named long. Counts are not guaranteed to be exact.
      *
-     * Metric names can be organized hierarchically by using the greater than separator. For example: LOG.inc("foo>bar>a"); LOG.inc("foo>bar>b");
-     * LOG.inc("foo>bazz>c");
+     * Metric names can be organized hierarchically by using the greater than separator.
+     *For example:
+     *      LOG.inc("foo>bar>a");
+     *      LOG.inc("foo>bar>b");
+     *      LOG.inc("foo>bazz>c");
      *
-     * Yields: foo |-- bar | |-- a = 1 | |-- b = 1 |-- baz | |-- c = 1
+     * Yields:
+     *      foo
+     *      |-- bar
+     *      |   |-- a = 1
+     *      |   |-- b = 1
+     *      |-- baz
+     *      |   |-- c = 1
      *
      * @param name null NOT ok.
      */
@@ -880,10 +985,19 @@ public final class MetricLogger {
     /**
      * Increments a named long by an amount. Counts are not guaranteed to be exact.
      *
-     * Metric names can be organized hierarchically by using the greater than separator. For example: LOG.inc("foo>bar>a",10); LOG.inc("foo>bar>b",20);
-     * LOG.inc("foo>bazz>c",20);
+     * Metric names can be organized hierarchically by using the greater than separator.
+     * For example:
+     *      LOG.inc("foo>bar>a",10);
+     *      LOG.inc("foo>bar>b",20);
+     *      LOG.inc("foo>bazz>c",20);
      *
-     * Yields: foo |-- bar | |-- a = 10 | |-- b = 20 |-- baz | |-- c = 30
+     * Yields:
+     *      foo
+     *      |-- bar
+     *      |   |-- a = 10
+     *      |   |-- b = 20
+     *      |-- baz
+     *      |   |-- c = 30
      *
      * @param name null NOT ok.
      * @param amount negative numbers are ok.
@@ -926,10 +1040,19 @@ public final class MetricLogger {
     /**
      * Increments a named AtomicLong. Counts guaranteed to be exact.
      *
-     * Metric names can be organized hierarchically by using the greater than separator. For example: LOG.incAtomic("foo>bar>a"); LOG.incAtomic("foo>bar>b");
-     * LOG.incAtomic("foo>bazz>c");
+     * Metric names can be organized hierarchically by using the greater than separator.
+     * For example:
+     *      LOG.incAtomic("foo>bar>a");
+     *      LOG.incAtomic("foo>bar>b");
+     *      LOG.incAtomic("foo>bazz>c");
      *
-     * Yields: foo |-- bar | |-- a = 1 | |-- b = 1 |-- baz | |-- c = 1
+     * Yields:
+     *      foo
+     *      |-- bar
+     *      |   |-- a = 1
+     *      |   |-- b = 1
+     *      |-- baz
+     *      |   |-- c = 1
      *
      * @param name null NOT ok.
      */
@@ -944,10 +1067,19 @@ public final class MetricLogger {
     /**
      * Increments a named AtomicLong by an amount. Counts are guaranteed to be exact.
      *
-     * Metric names can be organized hierarchically by using the greater than separator. For example: LOG.incAtomic("foo>bar>a",10);
-     * LOG.incAtomic("foo>bar>b",20); LOG.incAtomic("foo>bazz>c",20);
+     * Metric names can be organized hierarchically by using the greater than separator.
+     * For example:
+     *      LOG.incAtomic("foo>bar>a",10);
+     *      LOG.incAtomic("foo>bar>b",20);
+     *      LOG.incAtomic("foo>bazz>c",20);
      *
-     * Yields: foo |-- bar | |-- a = 10 | |-- b = 20 |-- baz | |-- c = 30
+     * Yields:
+     *      foo
+     *      |-- bar
+     *      |   |-- a = 10
+     *      |   |-- b = 20
+     *      |-- baz
+     *      |   |-- c = 30
      *
      * @param name null NOT ok.
      * @param amount negative numbers are ok.
@@ -986,19 +1118,124 @@ public final class MetricLogger {
     public void decAtomic(String name, long amount, String tenant) {
         countersAndTimers.getTenantMetric(tenant).atomicCounter(ValueType.COUNT, name).dec(amount);
     }
+    /**
+     * Split the past time into buckets and increments a named AtomicLong in current bucket by one.
+     * Counts are guaranteed to be exact.
+     *
+     * Metric names can be organized hierarchically by using the greater than separator.
+     * For example:
+     *    LOG.incBucket("foo>bar>a",10);
+     *    LOG.incBucket("foo>bar>b",20);
+     *    LOG.incBucket("foo>bazz>c",20);
+     *
+     * @param name null NOT ok.
+     * @param bucketSize   the length of bucket, in milliseconds
+     * @param numberOfBuckets    the number of buckets to be looked back, when computing total count in all buckets
+     */
+    public void incBucket(String name, long bucketSize, int numberOfBuckets) {
+        countersAndTimers.bucketedCounter(ValueType.COUNT, name, bucketSize, numberOfBuckets).inc();
+    }
+
+    public void incBucket(String name, long bucketSize, int numberOfBuckets, String tenant) {
+        countersAndTimers.getTenantMetric(tenant).bucketedCounter(ValueType.COUNT, name, bucketSize, numberOfBuckets).inc();
+    }
 
     /**
-     * Starts a named timer. Each time a time is started and stopped its elapse is added as a sample to
-     * org.apache.commons.math.stat.descriptive.SummaryStatistics;
+     * Split the past time into buckets and increments a named AtomicLong in current bucket by specified amount.
+     * Counts are guaranteed to be exact.
      *
-     * Each threads timings are captured discreetly. If the same thread re-enters start before stop is called it will not advance the start time.
+     * Metric names can be organized hierarchically by using the greater than separator.
+     * For example:
+     *    LOG.incBucket("foo>bar>a",10);
+     *    LOG.incBucket("foo>bar>b",20);
+     *    LOG.incBucket("foo>bazz>c",20);
      *
-     * Metric names can be organized hierarchically by using the greater than separator. For example: try { LOG.startTimer("foo>bar>a");
-     * LOG.startTimer("foo>bar>b"); LOG.startTimer("foo>bazz>c");
+     * @param name null NOT ok.
+     * @param bucketSize   the length of bucket, in milliseconds
+     * @param numberOfBuckets    the number of buckets to be looked back, when computing total count in all buckets
+     * @param amount   the amount to be added on the AtomicLong.
+     */
+    public void incBucket(String name, long bucketSize, int numberOfBuckets, long amount) {
+        countersAndTimers.bucketedCounter(ValueType.COUNT, name, bucketSize, numberOfBuckets).inc(amount);
+    }
+
+    public void incBucket(String name, long bucketSize, int numberOfBuckets, long amount, String tenant) {
+        countersAndTimers.getTenantMetric(tenant).bucketedCounter(ValueType.COUNT, name, bucketSize, numberOfBuckets).inc(amount);
+    }
+
+    /**
+     * Split the past time into buckets and decrements a named AtomicLong in current bucket by one.
+     * Counts are guaranteed to be exact.
      *
-     * ....... } finally { LOG.stopTimer("foo>bar>a"); LOG.stopTimer("foo>bar>b"); LOG.stopTimer("foo>bazz>c"); }
+     * Metric names can be organized hierarchically by using the greater than separator.
+     * For example:
+     *    LOG.incBucket("foo>bar>a",10);
+     *    LOG.incBucket("foo>bar>b",20);
+     *    LOG.incBucket("foo>bazz>c",20);
      *
-     * Yields: foo |-- bar | |-- a = 234325 (millis) | |-- b = 234328 (millis) |-- baz | |-- c = 234333 (millis)
+     * @param name null NOT ok.
+     * @param bucketSize   the length of bucket, in milliseconds
+     * @param numberOfBuckets    the number of buckets to be looked back, when computing total count in all buckets
+     */
+    public void decBucket(String name, long bucketSize, int numberOfBuckets) {
+        countersAndTimers.bucketedCounter(ValueType.COUNT, name, bucketSize, numberOfBuckets).dec();
+    }
+
+    public void decBucket(String name, long bucketSize, int numberOfBuckets, String tenant) {
+        countersAndTimers.getTenantMetric(tenant).bucketedCounter(ValueType.COUNT, name, bucketSize, numberOfBuckets).dec();
+    }
+
+    /**
+     * Split the past time into buckets and decrements a named AtomicLong in current bucket by specified amount.
+     * Counts are guaranteed to be exact.
+     *
+     * Metric names can be organized hierarchically by using the greater than separator.
+     * For example:
+     *    LOG.incBucket("foo>bar>a",10);
+     *    LOG.incBucket("foo>bar>b",20);
+     *    LOG.incBucket("foo>bazz>c",20);
+     *
+     * @param name null NOT ok.
+     * @param bucketSize   the length of bucket, in milliseconds
+     * @param numberOfBuckets    the number of buckets to be looked back, when computing total count in all buckets
+     * @param amount   the amount to be deducted from the AtomicLong.
+     */
+    public void decBucket(String name, long bucketSize, int numberOfBuckets, long amount) {
+        countersAndTimers.bucketedCounter(ValueType.COUNT, name, bucketSize, numberOfBuckets).dec(amount);
+    }
+
+    public void decBucket(String name, long bucketSize, int numberOfBuckets, long amount, String tenant) {
+        countersAndTimers.getTenantMetric(tenant).bucketedCounter(ValueType.COUNT, name, bucketSize, numberOfBuckets).dec(amount);
+    }
+
+    /**
+     * Starts a named timer. Each time a time is started and stopped its elapse is
+     * added as a sample to org.apache.commons.math.stat.descriptive.SummaryStatistics;
+     *
+     * Each threads timings are captured discreetly. If the same thread re-enters start before stop is called
+     * it will not advance the start time.
+     *
+     * Metric names can be organized hierarchically by using the greater than separator.
+     * For example:
+     *    try {
+     *      LOG.startTimer("foo>bar>a");
+     *      LOG.startTimer("foo>bar>b");
+     *      LOG.startTimer("foo>bazz>c");
+     *
+     *      .......
+     *    } finally {
+     *       LOG.stopTimer("foo>bar>a");
+     *       LOG.stopTimer("foo>bar>b");
+     *       LOG.stopTimer("foo>bazz>c");
+     *    }
+     *
+     * Yields:
+     *    foo
+     *    |-- bar
+     *    |   |-- a = 234325 (millis)
+     *    |   |-- b = 234328 (millis)
+     *    |-- baz
+     *    |   |-- c = 234333 (millis)
      *
      * @param name null NOT ok.
      */
@@ -1026,17 +1263,33 @@ public final class MetricLogger {
     }
 
     /**
-     * Starts a named timer. Each time a time is started and stopped its elapse is added as a sample to
-     * org.apache.commons.math.stat.descriptive.SummaryStatistics;
+     * Starts a named timer. Each time a time is started and stopped its elapse is
+     * added as a sample to org.apache.commons.math.stat.descriptive.SummaryStatistics;
      *
-     * Each threads timings are captured discreetly. If the same thread re-enters start before stop is called it will not advance the start time.
+     * Each threads timings are captured discreetly. If the same thread re-enters start before stop is called
+     * it will not advance the start time.
      *
-     * Metric names can be organized hierarchically by using the greater than separator. For example: try { LOG.startTimer("foo>bar>a");
-     * LOG.startTimer("foo>bar>b"); LOG.startTimer("foo>bazz>c");
+     * Metric names can be organized hierarchically by using the greater than separator.
+     * For example:
+     *    try {
+     *      LOG.startTimer("foo>bar>a");
+     *      LOG.startTimer("foo>bar>b");
+     *      LOG.startTimer("foo>bazz>c");
      *
-     * ....... } finally { LOG.stopTimer("foo>bar>a"); LOG.stopTimer("foo>bar>b"); LOG.stopTimer("foo>bazz>c"); }
+     *      .......
+     *    } finally {
+     *       LOG.stopTimer("foo>bar>a");
+     *       LOG.stopTimer("foo>bar>b");
+     *       LOG.stopTimer("foo>bazz>c");
+     *    }
      *
-     * Yields: foo |-- bar | |-- a = 234325 (nanos) | |-- b = 234328 (nanos) |-- baz | |-- c = 234333 (nanos)
+     * Yields:
+     *    foo
+     *    |-- bar
+     *    |   |-- a = 234325 (millis)
+     *    |   |-- b = 234328 (millis)
+     *    |-- baz
+     *    |   |-- c = 234333 (millis)
      *
      * @param name null NOT ok.
      */
@@ -1081,6 +1334,68 @@ public final class MetricLogger {
 
     public long stopTenantTimer(String name, String recordedName, String tenant) {
         return countersAndTimers.getTenantMetric(tenant).stopTimer(name, recordedName);
+    }
+
+    /**
+     * Start named timed operation and return {@link TimedOperation} for additional functionallity.<br/>
+     * The name parameter is combined with the logger name so there is no need to excplicitly provide it.<br/>
+     * {@link TimedOperation} is {@link AutoCloseable} to it can be used inside try block.<br/>
+     *
+     * @param name the name of the named timed operation
+     * @return new operation object
+     */
+    public TimedOperation startTimedOperation(String name) {
+        return new TimedOperation(this, name);
+    }
+
+    /**
+     * Start named timed operation and return {@link TimedOperation} for additional functionallity.<br/>
+     * The name parameter is combined with the logger name so there is no need to excplicitly provide it.<br/>
+     * {@link TimedOperation} is {@link AutoCloseable} to it can be used inside try block.<br/>
+     *
+     * @param name the name of the named timed operation
+     * @param initialStatus the initial status to set on the operation.
+     * @return new operation object
+     */
+    public TimedOperation startTimedOperation(String name, TimedOperation.Status initialStatus) {
+        return new TimedOperation(this, name, initialStatus);
+    }
+
+    /**
+     * Start named timed operation and return {@link TimedOperation} for additional functionallity.<br/>
+     * The name parameter is combined with the logger name so there is no need to excplicitly provide it.<br/>
+     * {@link TimedOperation} is {@link AutoCloseable} to it can be used inside try block.<br/>
+     *
+     * @param name the name of the named timed operation
+     * @param tenantId The tenant that is executing the operation.
+     * @return new operation object
+     */
+    public TimedOperation startTimedOperation(String name, Object tenantId) {
+        return new TimedOperation(this, name, tenantId);
+    }
+
+    /**
+     * Start named timed operation and return {@link TimedOperation} for additional functionallity.<br/>
+     * The name parameter is combined with the logger name so there is no need to excplicitly provide it.<br/>
+     * {@link TimedOperation} is {@link AutoCloseable} to it can be used inside try block.<br/>
+     *
+     * @param name the name of the named timed operation
+     * @param tenantId The tenant that is executing the operation.
+     * @param initialStatus the initial status to set on the operation.
+     * @return new operation object
+     */
+    public TimedOperation startTimedOperation(String name, Object tenantId, TimedOperation.Status initialStatus) {
+        return new TimedOperation(this, name, tenantId, initialStatus);
+    }
+
+    /**
+     * Log a Metrics Event
+     *
+     * @param name Name of the metric. Try to keep this unique: [jira project]_[feature name]_[event name]
+     * @return Metric object which you'll put metric properties onto, and then send().
+     */
+    public Metric metric(String name) {
+        return MetricEvent.metric(name);
     }
 
 }
