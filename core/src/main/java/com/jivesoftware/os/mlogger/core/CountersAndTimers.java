@@ -87,7 +87,7 @@ public final class CountersAndTimers {
         return name;
     }
 
-    public Collection<CountersAndTimers> getAllTenantSpecficMetrics() {
+    public Collection<CountersAndTimers> getAllTenantSpecificMetrics() {
         return tenantSpecifcMetric.values();
     }
 
@@ -256,6 +256,10 @@ public final class CountersAndTimers {
         return atomicCounters.get(key);
     }
 
+    public BucketedCounter getBucketedCounterIfAvailable(final String key) {
+        return bucketedCounters.get(key);
+    }
+
     public Timer getTimerIfAvailable(final String key) {
         return timers.get(key);
     }
@@ -305,6 +309,9 @@ public final class CountersAndTimers {
             v.reset();
         }
         for (AtomicCounter v : atomicCounters.values()) {
+            v.reset();
+        }
+        for (BucketedCounter v : bucketedCounters.values()) {
             v.reset();
         }
         for (Timer v : timers.values()) {
