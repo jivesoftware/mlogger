@@ -73,6 +73,7 @@ public final class CountersAndTimers {
     }
     private final ConcurrentHashMap<String, Counter> counters = new ConcurrentHashMap<>();
     private final ConcurrentHashMap<String, AtomicCounter> atomicCounters = new ConcurrentHashMap<>();
+    private final ConcurrentHashMap<String, BucketedCounter> bucketedCounters = new ConcurrentHashMap<>();
     private final ConcurrentHashMap<String, Long> startTimes = new ConcurrentHashMap<>();
     private final ConcurrentHashMap<String, Timer> timers = new ConcurrentHashMap<>();
     private final String name;
@@ -86,7 +87,7 @@ public final class CountersAndTimers {
         return name;
     }
 
-    public Collection<CountersAndTimers> getAllTenantSpecficMetrics() {
+    public Collection<CountersAndTimers> getAllTenantSpecificMetrics() {
         return tenantSpecifcMetric.values();
     }
 
@@ -108,6 +109,10 @@ public final class CountersAndTimers {
 
     public Set<Entry<String, AtomicCounter>> getAtomicCounters() {
         return atomicCounters.entrySet();
+    }
+
+    public Set<Entry<String, BucketedCounter>> getBucketedCounters() {
+        return bucketedCounters.entrySet();
     }
 
     public Set<Entry<String, Timer>> getTimers() {
@@ -134,6 +139,20 @@ public final class CountersAndTimers {
         if (counter == null) {
             counter = new AtomicCounter(type);
             AtomicCounter originalCounter = atomicCounters.putIfAbsent(key, counter);
+            if (originalCounter != null) {
+                return originalCounter;
+            }
+            register(name + ">" + key, counter);
+        }
+        return counter;
+    }
+
+    public BucketedCounter bucketedCounter(ValueType type, String key, long bucketSize, int numberOfBuckets) {
+        BucketedCounter counter = bucketedCounters.get(key);
+
+        if (counter == null) {
+            counter = new BucketedCounter(type, bucketSize, numberOfBuckets);
+            BucketedCounter originalCounter = bucketedCounters.putIfAbsent(key, counter);
             if (originalCounter != null) {
                 return originalCounter;
             }
@@ -237,6 +256,10 @@ public final class CountersAndTimers {
         return atomicCounters.get(key);
     }
 
+    public BucketedCounter getBucketedCounterIfAvailable(final String key) {
+        return bucketedCounters.get(key);
+    }
+
     public Timer getTimerIfAvailable(final String key) {
         return timers.get(key);
     }
@@ -286,6 +309,9 @@ public final class CountersAndTimers {
             v.reset();
         }
         for (AtomicCounter v : atomicCounters.values()) {
+            v.reset();
+        }
+        for (BucketedCounter v : bucketedCounters.values()) {
             v.reset();
         }
         for (Timer v : timers.values()) {
