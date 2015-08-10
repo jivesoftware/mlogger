@@ -91,6 +91,20 @@ public final class CountersAndTimers {
         return tenantSpecifcMetric.values();
     }
 
+    public boolean streamTenantMetrics(String tenant, TenantMetricStream stream) {
+        CountersAndTimers got = tenantSpecifcMetric.get(tenant);
+        return stream.stream(tenant, got);
+    }
+
+    public boolean streamAllTenantMetrics(TenantMetricStream stream) {
+        for (Entry<String, CountersAndTimers> entrySet : tenantSpecifcMetric.entrySet()) {
+            if (!stream.stream(entrySet.getKey(), entrySet.getValue())) {
+                return false;
+            }
+        }
+        return true;
+    }
+
     public CountersAndTimers getTenantMetric(String tenant) {
         CountersAndTimers got = tenantSpecifcMetric.get(tenant);
         if (got == null) {
