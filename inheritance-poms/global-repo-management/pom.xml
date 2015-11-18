@@ -9,6 +9,21 @@
     <name>MLogger</name>
     <description>Metric Logger (Wrapper around log4j that allow programmer to log counts and timings.)</description>
     <url>https://github.com/jivesoftware/mlogger</url>
+    
+    <developers>
+        <developer>
+          <name>Jonathaa Colt</name>
+          <email>jonathan.colt@jivesoftware.com</email>
+          <organization>Jive Software Inc</organization>
+          <organizationUrl>https://www.jivesoftware.com/</organizationUrl>
+        </developer>
+        <developer>
+          <name>Kevin Karpenske</name>
+          <email>kevin.karpenske@jivesoftware.com</email>
+          <organization>Jive Software Inc</organization>
+          <organizationUrl>https://www.jivesoftware.com/</organizationUrl>
+        </developer>
+    </developers>
 
     <inceptionYear>2013</inceptionYear>
     <licenses>
