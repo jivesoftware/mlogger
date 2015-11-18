@@ -30,7 +30,12 @@
             <url>http://nexus-int-qa.eng.jiveland.com/content/repositories/snapshots</url>
         </snapshotRepository>
     </distributionManagement>
-
+    
+    <properties>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <maven.build.timestamp.format>yyyy-MM-dd-HH:mm:ss.S</maven.build.timestamp.format>
+    </properties>
     <build>
         <plugins>
             <plugin>
