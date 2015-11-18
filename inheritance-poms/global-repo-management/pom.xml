@@ -5,6 +5,10 @@
     <artifactId>global-repo-management</artifactId>
     <version>0.14</version>
     <packaging>pom</packaging>
+    
+    <name>MLogger</name>
+    <description>Metric Logger (Wrapper around log4j that allow programmer to log counts and timings.)</description>
+    <url>https://github.com/jivesoftware/mlogger</url>
 
     <inceptionYear>2013</inceptionYear>
     <licenses>
