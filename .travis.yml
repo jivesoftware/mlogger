@@ -1,13 +1,16 @@
 language: java
 sudo: false
-
 jdk:
-  - oraclejdk8
-  
+- oraclejdk8
 install: true
-
 branches:
   only:
-    - master
-
+  - master
 script: mvn clean test jacoco:report coveralls:report
+deploy:
+  provider: releases
+  api_key:
+    secure: iP7Jle8DWOyp+fTf7N+OfFmcMzASE6clKSTxnGND169OLuYMVjPI4xmNlYHvef4LOCMSTfcwrlozH40S0BuEFAk2ZrouCs4oUvjWc3W59hxlDxn0ufZb6mRA+uF49gRrcTi+uV55kwqT5kn/OfjEchZJVwuwdgbjY/3rHAftf+4=
+  file: target/bla.jar
+  on:
+    repo: jivesoftware/mlogger
