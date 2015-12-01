@@ -2,11 +2,15 @@ language: java
 sudo: false
 jdk:
 - oraclejdk8
+env:
+  global:
+  - secure: iP7Jle8DWOyp+fTf7N+OfFmcMzASE6clKSTxnGND169OLuYMVjPI4xmNlYHvef4LOCMSTfcwrlozH40S0BuEFAk2ZrouCs4oUvjWc3W59hxlDxn0ufZb6mRA+uF49gRrcTi+uV55kwqT5kn/OfjEchZJVwuwdgbjY/3rHAftf+4=
 install: true
 branches:
   only:
   - master
 script: mvn install jacoco:report coveralls:report
+after_success: - .utility/initiate-publish.sh
 
 before_deploy:
   - "mvn -DskipTests package"
