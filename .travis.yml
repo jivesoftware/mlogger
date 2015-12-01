@@ -6,7 +6,7 @@ install: true
 branches:
   only:
   - master
-script: mvn clean test jacoco:report coveralls:report
+script: mvn install jacoco:report coveralls:report
 
 before_deploy:
   - "mvn -DskipTests package"
