@@ -93,4 +93,13 @@ public class Timer implements TimerMXBean {
     public double get99ThPercentile() {
         return stats.getPercentile(99);
     }
+
+    /**
+
+    @param percentile 0 - 100;
+    @return
+    */
+    public double getPercentile(double percentile) {
+        return stats.getPercentile(percentile);
+    }
 }
