@@ -9,7 +9,7 @@ install: true
 branches:
   only:
   - master
-script: mvn install javadoc:aggregator jacoco:report coveralls:report
+script: mvn install javadoc:aggregate jacoco:report coveralls:report
 after_success: 
   - chmod a+x .utility/push-javadoc-to-gh-pages.sh
   - .utility/push-javadoc-to-gh-pages.sh
