@@ -10,12 +10,12 @@ if [ "$TRAVIS_JDK_VERSION" == "oraclejdk8" ] && [ "$TRAVIS_PULL_REQUEST" == "fal
   git clone --quiet https://${JIVE_OS_TOKEN}@github.com/jivesoftware/mlogger.wiki.git > /dev/null
 
   cd mlogger.wiki
-  git rm -rf ./javadoc
-  cp -Rf $HOME/javadoc-latest ./javadoc
+  git rm -rf ./apidocs
+  cp -Rf $HOME/apidocs ./apidocs
   git add -f .
-  git commit -m "Lastest javadoc on successful travis build $TRAVIS_BUILD_NUMBER auto-pushed to wiki"
+  git commit -m "Lastest apidocs on successful travis build $TRAVIS_BUILD_NUMBER auto-pushed to wiki"
   git push -fq origin master > /dev/null
 
-  echo -e "Published Javadoc to wiki.\n"
+  echo -e "Published apidocs to wiki.\n"
   
 fi
