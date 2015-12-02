@@ -11,6 +11,7 @@ branches:
   - master
 script: mvn install javadoc:javadoc jacoco:report coveralls:report
 after_success: 
+  - chmod a+x .utility/push-javadoc-to-gh-pages.sh
   - .utility/push-javadoc-to-gh-pages.sh
 
 before_deploy:
