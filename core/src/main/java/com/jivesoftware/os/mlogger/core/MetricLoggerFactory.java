@@ -16,6 +16,7 @@
 package com.jivesoftware.os.mlogger.core;
 
 import java.util.concurrent.ConcurrentHashMap;
+import org.apache.logging.log4j.Level;
 
 /**
  * Convenient way to create MetricLoggers. This impl will create metric a metric logger that exposes all its metrics via JMX. Added the concept of
@@ -72,5 +73,24 @@ public class MetricLoggerFactory {
         MetricLogger serviceLogger = new MetricLogger(name, loggerSummary);
         serviceLoggers.putIfAbsent(name, serviceLogger);
         return serviceLogger;
+    }
+
+    static public void setLogLevel(Class<?> _class, Level level) {
+        setLogLevel(_class.getCanonicalName(), level);
+    }
+
+    static public void setLogLevel(String name, Level level) {
+        setLogLevel(name, false, level);
+    }
+
+    static public void setLogLevel(String name, boolean logsExternalInteractions, Level level) {
+        MetricLogger got = getLogger(name, logsExternalInteractions);
+        if (got != null) {
+            if (got.logger instanceof org.apache.logging.log4j.core.Logger) {
+                ((org.apache.logging.log4j.core.Logger) got.logger).setLevel(level);
+            } else {
+                got.warn("Failed to set level for this logger because it is not an instance of org.apache.logging.log4j.core.Logger");
+            }
+        }
     }
 }
