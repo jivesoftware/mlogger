@@ -41,11 +41,13 @@ public class Timer implements TimerMXBean {
 
     public void sample(long sample) {
         sampleCount++;
-        this.lastSample = sample;
+        lastSample = sample;
         stats.addValue(sample);
     }
 
     public void reset() {
+        lastSample = 0;
+        sampleCount = 0;
         stats.clear();
     }
 
