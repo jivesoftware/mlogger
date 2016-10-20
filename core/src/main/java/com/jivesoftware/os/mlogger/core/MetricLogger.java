@@ -204,6 +204,7 @@ public final class MetricLogger {
         }
 
         loggerSummary.traces++;
+        loggerSummary.traceThrown(t);
         loggerTracesCount.inc();
         String msgStr = MessageFormatter.arrayFormat(messagePattern, argArray);
         logger.log(Level.TRACE, msgStr, t);
@@ -246,6 +247,7 @@ public final class MetricLogger {
         }
 
         loggerSummary.traces++;
+        loggerSummary.traceThrown(t);
         loggerTracesCount.inc();
         logger.log(Level.TRACE, msg, t);
     }
@@ -366,6 +368,7 @@ public final class MetricLogger {
         }
 
         loggerSummary.debugs++;
+        loggerSummary.debugThrown(t);
         loggerDebugsCount.inc();
         String msgStr = MessageFormatter.arrayFormat(messagePattern, argArray);
         logger.log(Level.DEBUG, msgStr, t);
@@ -408,6 +411,7 @@ public final class MetricLogger {
         }
 
         loggerSummary.debugs++;
+        loggerSummary.debugThrown(t);
         loggerDebugsCount.inc();
         logger.log(Level.DEBUG, msg, t);
     }
@@ -509,6 +513,7 @@ public final class MetricLogger {
         }
 
         loggerSummary.warns++;
+        loggerSummary.warnThrown(t);
         loggerWarnsCount.inc();
         String msgStr = MessageFormatter.arrayFormat(messagePattern, argArray);
         logger.log(Level.WARN, msgStr, t);
@@ -553,6 +558,7 @@ public final class MetricLogger {
         }
 
         loggerSummary.warns++;
+        loggerSummary.warnThrown(t);
         loggerWarnsCount.inc();
         logger.log(Level.WARN, msg, t);
         loggerSummary.lastNWarns.add(msg + (t != null ? " " + t.toString() : ""));
@@ -654,6 +660,7 @@ public final class MetricLogger {
         }
 
         loggerSummary.infos++;
+        loggerSummary.infoThrown(t);
         loggerInfosCount.inc();
         String msgStr = MessageFormatter.arrayFormat(messagePattern, argArray);
         logger.log(Level.INFO, msgStr, t);
@@ -698,6 +705,7 @@ public final class MetricLogger {
         }
 
         loggerSummary.infos++;
+        loggerSummary.infoThrown(t);
         loggerInfosCount.inc();
         logger.log(Level.INFO, messagePattern, t);
         loggerSummary.lastNInfos.add(messagePattern + (t != null ? " " + t.toString() : ""));
@@ -817,6 +825,7 @@ public final class MetricLogger {
         }
 
         loggerSummary.errors++;
+        loggerSummary.errorThrown(t);
         loggerErrorsCount.inc();
         String msgStr = MessageFormatter.arrayFormat(messagePattern, argArray);
         logger.log(Level.ERROR, msgStr, t);
@@ -888,6 +897,7 @@ public final class MetricLogger {
         }
 
         loggerSummary.errors++;
+        loggerSummary.errorThrown(t);
         loggerErrorsCount.inc();
         logger.log(Level.ERROR, messagePattern, t);
         loggerSummary.lastNErrors.add(messagePattern + (t != null ? " " + t.toString() : ""));
@@ -905,6 +915,7 @@ public final class MetricLogger {
         }
 
         loggerSummary.errors++;
+        loggerSummary.errorThrown(t);
         loggerErrorsCount.inc();
         logger.log(Level.ERROR, messagePattern, t);
         loggerSummary.lastNErrors.add(messagePattern + (t != null ? " " + t.toString() : ""));

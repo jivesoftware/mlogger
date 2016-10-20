@@ -15,12 +15,12 @@
  */
 package com.jivesoftware.os.mlogger.core;
 
-import java.util.concurrent.atomic.AtomicLong;
+import java.util.concurrent.atomic.LongAdder;
 
 public final class AtomicCounter implements AtomicCounterMXBean {
 
     private ValueType type;
-    private AtomicLong value = new AtomicLong(0L);
+    private LongAdder value = new LongAdder();
 
     public AtomicCounter() {
     }
@@ -36,7 +36,7 @@ public final class AtomicCounter implements AtomicCounterMXBean {
         sb.append(type.name());
         sb.append("\",");
         sb.append("\"value\":");
-        sb.append(value.get());
+        sb.append(value.longValue());
         sb.append("}");
         return sb.toString();
     }
@@ -51,11 +51,12 @@ public final class AtomicCounter implements AtomicCounterMXBean {
 
     @Override
     public long getValue() {
-        return value.get();
+        return value.longValue();
     }
 
     public void setValue(long value) {
-        this.value.set(value);
+        this.value.reset();
+        this.value.add(value);
     }
 
     @Override
@@ -64,30 +65,31 @@ public final class AtomicCounter implements AtomicCounterMXBean {
     }
 
     public void reset() {
-        this.value.set(0);
+        this.value.reset();
     }
 
     public void inc() {
-        value.incrementAndGet();
+        value.increment();
     }
 
     public void inc(long amount) {
-        value.addAndGet(amount);
+        value.add(amount);
     }
 
     public void dec() {
-        value.decrementAndGet();
+        value.decrement();
     }
 
     public void dec(long amount) {
-        value.addAndGet(-amount);
+        value.add(-amount);
     }
 
     public void set(long value) {
-        this.value.set(value);
+        this.value.reset();
+        this.value.add(value);
     }
 
     public long getCount() {
-        return value.get();
+        return value.longValue();
     }
 }
