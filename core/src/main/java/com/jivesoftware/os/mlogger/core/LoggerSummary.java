@@ -64,6 +64,13 @@ public class LoggerSummary {
         traces = 0;
         warns = 0;
         errors = 0;
+
+        infoThrown.clear();
+        debugsThrown.clear();
+        tracesThrown.clear();
+        warnsThrown.clear();
+        errorsThrown.clear();
+
     }
 
     private Map<String, Thrown> infoThrown = new ConcurrentHashMap<>(16, 0.75f, 64);
