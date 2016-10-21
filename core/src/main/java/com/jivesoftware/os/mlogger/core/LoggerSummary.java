@@ -15,6 +15,9 @@
  */
 package com.jivesoftware.os.mlogger.core;
 
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
+import java.util.Base64;
 import java.util.Collection;
 import java.util.Date;
 import java.util.Map;
@@ -65,65 +68,41 @@ public class LoggerSummary {
         warns = 0;
         errors = 0;
 
-        infoThrown.clear();
-        debugsThrown.clear();
-        tracesThrown.clear();
-        warnsThrown.clear();
-        errorsThrown.clear();
+        thrown.clear();
 
     }
 
-    private Map<String, Thrown> infoThrown = new ConcurrentHashMap<>(16, 0.75f, 64);
-    private Map<String, Thrown> debugsThrown = new ConcurrentHashMap<>(16, 0.75f, 64);
-    private Map<String, Thrown> tracesThrown = new ConcurrentHashMap<>(16, 0.75f, 64);
-    private Map<String, Thrown> warnsThrown = new ConcurrentHashMap<>(16, 0.75f, 64);
-    private Map<String, Thrown> errorsThrown = new ConcurrentHashMap<>(16, 0.75f, 64);
+    private Map<String, Thrown> thrown = new ConcurrentHashMap<>(16, 0.75f, 64);
+
+    public Collection<Thrown> throwables() {
+        return thrown.values();
+    }
 
     public void infoThrown(Throwable throwable) {
-        compute(infoThrown, throwable);
-    }
-
-    public Collection<Thrown> infoThrowables() {
-        return infoThrown.values();
+        compute(thrown, "info", throwable);
     }
 
     public void debugThrown(Throwable throwable) {
-        compute(debugsThrown, throwable);
-    }
-
-    public Collection<Thrown> debugThrowables() {
-        return debugsThrown.values();
+        compute(thrown, "debug", throwable);
     }
 
     public void traceThrown(Throwable throwable) {
-        compute(tracesThrown, throwable);
-    }
-
-    public Collection<Thrown> traceThrowables() {
-        return tracesThrown.values();
+        compute(thrown, "trace", throwable);
     }
 
     public void warnThrown(Throwable throwable) {
-        compute(warnsThrown, throwable);
-    }
-
-    public Collection<Thrown> warnThrowables() {
-        return warnsThrown.values();
+        compute(thrown, "warn", throwable);
     }
 
     public void errorThrown(Throwable throwable) {
-        compute(errorsThrown, throwable);
+        compute(thrown, "error", throwable);
     }
 
-    public Collection<Thrown> errorThrowables() {
-        return errorsThrown.values();
-    }
-
-    private void compute(Map<String, Thrown> thrown, Throwable throwable) {
+    private void compute(Map<String, Thrown> thrown, String level, Throwable throwable) {
         if (throwable == null) {
             return;
         }
-        Thrown t = thrown(throwable);
+        Thrown t = thrown(level, throwable);
         thrown.compute(t.key, (k, current) -> {
             Thrown compute = current;
             if (current == null) {
@@ -131,32 +110,61 @@ public class LoggerSummary {
             }
             compute.increment();
             if (throwable.getCause() != null) {
-                compute(compute.cause, throwable.getCause());
+                compute(compute.cause, level, throwable.getCause());
             }
             return compute;
         });
     }
 
-    public Thrown thrown(Throwable throwable) {
+    public Thrown thrown(String level, Throwable throwable) {
         String message = throwable.getMessage();
         StackTraceElement[] stackTrace = throwable.getStackTrace();
         StackTraceElement keyStackTrace = stackTrace[0];
-        String key = keyStackTrace.getFileName() + "|" + keyStackTrace.getClassName() + "|" + keyStackTrace.getMethodName() + "|" + keyStackTrace
-            .getLineNumber() + "|" + keyStackTrace.isNativeMethod();
-        return new Thrown(key, message, stackTrace);
+        String key = key(level, throwable, stackTrace);
+        return new Thrown(key, level, message, stackTrace);
+    }
+
+    private String key(String level, Throwable throwable, StackTraceElement[] stackTrace) {
+
+        MessageDigest md;
+        try {
+            md = MessageDigest.getInstance("MD5");
+        } catch (NoSuchAlgorithmException ex) {
+            return "MD5-failed-instance-hashcode=" + String.valueOf(throwable.hashCode());
+        }
+        md.update(level.getBytes());
+        for (StackTraceElement stackFrame : stackTrace) {
+            md.update(stackFrame.getClassName().getBytes());
+            md.update(":".getBytes());
+            md.update(stackFrame.getMethodName().getBytes());
+            md.update(":".getBytes());
+            md.update(String.valueOf(stackFrame.getLineNumber()).getBytes());
+        }
+        return Base64.getEncoder().encodeToString(md.digest());
+
     }
 
     public static class Thrown {
 
-        final public String key;
-        final public String message;
-        final public StackTraceElement[] stackTrace;
-        final public LongAdder thrown;
+        public String key;
+        public String level;
+        public String message;
+        public StackTraceElement[] stackTrace;
+        public LongAdder thrown;
         public long timestamp;
-        final public Map<String, Thrown> cause = new ConcurrentHashMap<>();
+        public Map<String, Thrown> cause = new ConcurrentHashMap<>();
 
-        public Thrown(String key, String message, StackTraceElement[] stackTrace) {
+        public Thrown() {
+            this.key = null;
+            this.level = null;
+            this.message = null;
+            this.stackTrace = null;
+            this.thrown = null;
+        }
+
+        public Thrown(String key, String level, String message, StackTraceElement[] stackTrace) {
             this.key = key;
+            this.level = level;
             this.message = message;
             this.stackTrace = stackTrace;
             this.thrown = new LongAdder();
