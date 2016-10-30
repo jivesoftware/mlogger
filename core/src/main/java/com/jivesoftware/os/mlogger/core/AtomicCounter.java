@@ -20,7 +20,7 @@ import java.util.concurrent.atomic.LongAdder;
 public final class AtomicCounter implements AtomicCounterMXBean {
 
     private ValueType type;
-    private LongAdder value = new LongAdder();
+    private final LongAdder value = new LongAdder();
 
     public AtomicCounter() {
     }
