@@ -22,7 +22,7 @@ import java.util.concurrent.Callable;
  */
 public class EndPointMetrics {
 
-    private static final MetricLogger log = MetricLoggerFactory.getLogger();
+    private static final MetricLogger LOG = MetricLoggerFactory.getLogger();
     private final RunningThreadTracker runningThreadTracker;
     private final CountAndTime countAndTime;
 
@@ -31,7 +31,7 @@ public class EndPointMetrics {
      * @param name cannot be null.
      */
     public EndPointMetrics(String name) {
-        this(name, log);
+        this(name, LOG);
     }
 
     /**

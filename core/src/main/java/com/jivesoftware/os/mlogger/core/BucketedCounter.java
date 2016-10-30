@@ -2,7 +2,7 @@ package com.jivesoftware.os.mlogger.core;
 
 import com.googlecode.concurrentlinkedhashmap.ConcurrentLinkedHashMap;
 import java.util.Map;
-import java.util.concurrent.atomic.AtomicLong;
+import java.util.concurrent.atomic.LongAdder;
 
 /**
  * Implementation of BucketedCounterMXBean, which divides past time into buckets (a bucket = n milliseconds)
@@ -15,15 +15,15 @@ public final class BucketedCounter implements BucketedCounterMXBean {
 
     private final long bucketSize;
     private final int numberOfBuckets;
-    private final ConcurrentLinkedHashMap<Long, AtomicLong> bucketedCount;
+    private final ConcurrentLinkedHashMap<Long, LongAdder> bucketedCount;
 
     public BucketedCounter(ValueType type, long bucketSize, int numberOfBuckets) {
         this.type = type;
         this.bucketSize = bucketSize;
         this.numberOfBuckets = numberOfBuckets;
-        this.bucketedCount = new ConcurrentLinkedHashMap.Builder<Long, AtomicLong>()
-                .maximumWeightedCapacity(numberOfBuckets + 1)
-                .build();
+        this.bucketedCount = new ConcurrentLinkedHashMap.Builder<Long, LongAdder>()
+            .maximumWeightedCapacity(numberOfBuckets + 1)
+            .build();
     }
 
     public String toJsonString() {
@@ -50,11 +50,11 @@ public final class BucketedCounter implements BucketedCounterMXBean {
     public long getValue(int maxNumberOfBuckets) {
         long value = 0L;
         long currentBucketKey = (System.currentTimeMillis()) / bucketSize;
-        for (Map.Entry<Long, AtomicLong> bucket : bucketedCount.entrySet()) {
+        for (Map.Entry<Long, LongAdder> bucket : bucketedCount.entrySet()) {
             if (currentBucketKey - bucket.getKey() >= maxNumberOfBuckets) {
                 continue;
             }
-            value += bucket.getValue().get();
+            value += bucket.getValue().longValue();
         }
 
         return value;
@@ -71,8 +71,8 @@ public final class BucketedCounter implements BucketedCounterMXBean {
     }
 
     public void reset() {
-        for (Map.Entry<Long, AtomicLong> bucket : bucketedCount.entrySet()) {
-            bucket.getValue().set(0L);
+        for (Map.Entry<Long, LongAdder> bucket : bucketedCount.entrySet()) {
+            bucket.getValue().reset();
         }
     }
 
@@ -94,12 +94,8 @@ public final class BucketedCounter implements BucketedCounterMXBean {
 
     private void incrementBucketValue(long amount) {
         Long bucketKey = (System.currentTimeMillis()) / bucketSize;
-        AtomicLong bucketValue = bucketedCount.get(bucketKey);
-        if (bucketValue != null) {
-            bucketValue.addAndGet(amount);
-        } else {
-            bucketedCount.put(bucketKey, new AtomicLong(amount));
-        }
+        LongAdder bucketValue = bucketedCount.computeIfAbsent(bucketKey, (t) -> new LongAdder());
+        bucketValue.add(amount);
     }
 
     public long getCount(int maxNumberOfBuckets) {

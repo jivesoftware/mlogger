@@ -35,18 +35,18 @@ import org.apache.logging.log4j.Logger;
  */
 public final class CountersAndTimers {
 
-    private final static Logger logger = LogManager.getLogger(CountersAndTimers.class.getName());
-    private final static ConcurrentHashMap<String, CountersAndTimers> loggers = new ConcurrentHashMap<>();
+    private final static Logger LOGGER = LogManager.getLogger(CountersAndTimers.class.getName());
+    private final static ConcurrentHashMap<String, CountersAndTimers> LOGGERS = new ConcurrentHashMap<>();
 
     public static CountersAndTimers getOrCreate(Class _class) {
         return getOrCreate(classToKey(_class));
     }
 
     public static CountersAndTimers getOrCreate(String name) {
-        CountersAndTimers got = loggers.get(name);
+        CountersAndTimers got = LOGGERS.get(name);
         if (got == null) {
             got = new CountersAndTimers(name);
-            CountersAndTimers had = loggers.putIfAbsent(name, got);
+            CountersAndTimers had = LOGGERS.putIfAbsent(name, got);
             if (had != null) {
                 got = had;
             }
@@ -55,11 +55,11 @@ public final class CountersAndTimers {
     }
 
     public static Collection<CountersAndTimers> getAll() {
-        return loggers.values();
+        return LOGGERS.values();
     }
 
     public static void resetAll() {
-        for (CountersAndTimers cat : loggers.values()) {
+        for (CountersAndTimers cat : LOGGERS.values()) {
             cat.resetAllCounterAndTimers();
         }
     }
@@ -191,7 +191,7 @@ public final class CountersAndTimers {
         String threadKey = key + Thread.currentThread().getId();
         Long startTime = startTimes.remove(threadKey);
         if (startTime == null) {
-            logger.warn("Trying to stop a timer you never called start on: TimerId:" + key);
+            LOGGER.warn("Trying to stop a timer you never called start on: TimerId:" + key);
             return -1;
         }
 
@@ -238,7 +238,7 @@ public final class CountersAndTimers {
         String threadKey = key + Thread.currentThread().getId();
         Long startTime = startTimes.remove(threadKey);
         if (startTime == null) {
-            logger.warn("Trying to stop a timer you never called start on: TimerId:" + key);
+            LOGGER.warn("Trying to stop a timer you never called start on: TimerId:" + key);
             return new Timer(2);
         }
 
@@ -297,7 +297,7 @@ public final class CountersAndTimers {
         Class clazz = mbean.getClass();
         String objectName = "service.metrics:type=" + clazz.getSimpleName() + "," + sb.toString();
 
-        logger.debug("registering bean: " + objectName);
+        LOGGER.debug("registering bean: " + objectName);
 
         MBeanServer mbs = ManagementFactory.getPlatformMBeanServer();
 
@@ -311,10 +311,10 @@ public final class CountersAndTimers {
 
             mbs.registerMBean(mbean, mbeanName);
 
-            logger.debug("registered bean: " + objectName);
+            LOGGER.debug("registered bean: " + objectName);
         } catch (MalformedObjectNameException | NotCompliantMBeanException |
             InstanceAlreadyExistsException | InstanceNotFoundException | MBeanRegistrationException e) {
-            logger.warn("unable to register bean: " + objectName + "cause: " + e.getMessage(), e);
+            LOGGER.warn("unable to register bean: " + objectName + "cause: " + e.getMessage(), e);
         }
     }
 

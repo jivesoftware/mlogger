@@ -17,9 +17,11 @@ package com.jivesoftware.os.mlogger.core;
 
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
+import java.util.ArrayList;
 import java.util.Base64;
 import java.util.Collection;
 import java.util.Date;
+import java.util.List;
 import java.util.Map;
 import java.util.TimeZone;
 import java.util.concurrent.ConcurrentHashMap;
@@ -35,25 +37,25 @@ public class LoggerSummary {
     public static LoggerSummary INSTANCE = new LoggerSummary();
     public static LoggerSummary INSTANCE_EXTERNAL_INTERACTIONS = new LoggerSummary();
 
-    public long infos;
-    public long debugs;
-    public long traces;
-    public long warns;
-    public long errors;
+    public final LongAdder infos = new LongAdder();
+    public final LongAdder debugs = new LongAdder();
+    public final LongAdder traces = new LongAdder();
+    public final LongAdder warns = new LongAdder();
+    public final LongAdder errors = new LongAdder();
 
-    public LastN<String> lastNInfos = new LastN<String>(new String[10]) {
+    public final LastN<String> lastNInfos = new LastN<String>(new String[10]) {
         @Override
         public void add(String t) {
             super.add(DATE_FORMAT.format(new Date()) + " " + t);
         }
     };
-    public LastN<String> lastNWarns = new LastN<String>(new String[10]) {
+    public final LastN<String> lastNWarns = new LastN<String>(new String[10]) {
         @Override
         public void add(String t) {
             super.add(DATE_FORMAT.format(new Date()) + " " + t);
         }
     };
-    public LastN<String> lastNErrors = new LastN<String>(new String[10]) {
+    public final LastN<String> lastNErrors = new LastN<String>(new String[10]) {
         @Override
         public void add(String t) {
             super.add(DATE_FORMAT.format(new Date()) + " " + t);
@@ -61,12 +63,15 @@ public class LoggerSummary {
     };
 
     public void reset() {
-        lastNInfos = new LastN<>(new String[10]);
-        infos = 0;
-        debugs = 0;
-        traces = 0;
-        warns = 0;
-        errors = 0;
+        lastNInfos.clear(null);
+        lastNWarns.clear(null);
+        lastNErrors.clear(null);
+
+        infos.reset();
+        debugs.reset();
+        traces.reset();
+        warns.reset();
+        errors.reset();
 
         thrown.clear();
 
@@ -151,7 +156,7 @@ public class LoggerSummary {
         public String message;
         public StackTraceElement[] stackTrace;
         public LongAdder thrown;
-        public long timestamp;
+        public List<Long> timestamps = new ArrayList<>();
         public Map<String, Thrown> cause = new ConcurrentHashMap<>();
 
         public Thrown() {
@@ -172,7 +177,7 @@ public class LoggerSummary {
 
         public void increment() {
             thrown.increment();
-            timestamp = System.currentTimeMillis();
+            timestamps.add(System.currentTimeMillis());
         }
     }
 }
