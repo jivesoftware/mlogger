@@ -120,11 +120,14 @@ public class LoggerSummary {
     }
 
     public Thrown thrown(String level, Throwable throwable) {
+        String package_ =throwable.getClass().getPackage().getName();
+        String class_ =throwable.getClass().getSimpleName();
+
         String message = throwable.getMessage();
         StackTraceElement[] stackTrace = throwable.getStackTrace();
         StackTraceElement keyStackTrace = stackTrace[0];
         String key = key(level, throwable, stackTrace);
-        return new Thrown(key, level, message, stackTrace);
+        return new Thrown(key, level, package_, class_, message, stackTrace);
     }
 
     private String key(String level, Throwable throwable, StackTraceElement[] stackTrace) {
@@ -151,6 +154,8 @@ public class LoggerSummary {
 
         public String key;
         public String level;
+        public String package_;
+        public String class_;
         public String message;
         public StackTraceElement[] stackTrace;
         public LongAdder thrown;
@@ -160,14 +165,18 @@ public class LoggerSummary {
         public Thrown() {
             this.key = null;
             this.level = null;
+            this.package_ = null;
+            this.class_ = null;
             this.message = null;
             this.stackTrace = null;
             this.thrown = null;
         }
 
-        public Thrown(String key, String level, String message, StackTraceElement[] stackTrace) {
+        public Thrown(String key, String level, String package_, String class_, String message, StackTraceElement[] stackTrace) {
             this.key = key;
             this.level = level;
+            this.package_ = package_;
+            this.class_ = class_;
             this.message = message;
             this.stackTrace = stackTrace;
             this.thrown = new LongAdder();
