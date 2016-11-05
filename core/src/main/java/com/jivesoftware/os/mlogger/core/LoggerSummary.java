@@ -17,11 +17,9 @@ package com.jivesoftware.os.mlogger.core;
 
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
-import java.util.ArrayList;
 import java.util.Base64;
 import java.util.Collection;
 import java.util.Date;
-import java.util.List;
 import java.util.Map;
 import java.util.TimeZone;
 import java.util.concurrent.ConcurrentHashMap;
@@ -156,7 +154,7 @@ public class LoggerSummary {
         public String message;
         public StackTraceElement[] stackTrace;
         public LongAdder thrown;
-        public List<Long> timestamps = new ArrayList<>();
+        public long timestamp = 0;
         public Map<String, Thrown> cause = new ConcurrentHashMap<>();
 
         public Thrown() {
@@ -177,7 +175,7 @@ public class LoggerSummary {
 
         public void increment() {
             thrown.increment();
-            timestamps.add(System.currentTimeMillis());
+            timestamp = System.currentTimeMillis();
         }
     }
 }
