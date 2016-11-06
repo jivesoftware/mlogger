@@ -20,9 +20,11 @@ import java.security.NoSuchAlgorithmException;
 import java.util.Base64;
 import java.util.Collection;
 import java.util.Date;
+import java.util.List;
 import java.util.Map;
 import java.util.TimeZone;
 import java.util.concurrent.ConcurrentHashMap;
+import java.util.concurrent.CopyOnWriteArrayList;
 import java.util.concurrent.atomic.LongAdder;
 
 /**
@@ -111,7 +113,7 @@ public class LoggerSummary {
             if (current == null) {
                 compute = t;
             }
-            compute.increment();
+            compute.increment(new ThrownMessage(Thread.currentThread().getName(), throwable.getMessage(), System.currentTimeMillis()));
             if (throwable.getCause() != null) {
                 compute(compute.cause, level, throwable.getCause());
             }
@@ -125,9 +127,8 @@ public class LoggerSummary {
 
         String message = throwable.getMessage();
         StackTraceElement[] stackTrace = throwable.getStackTrace();
-        StackTraceElement keyStackTrace = stackTrace[0];
         String key = key(level, throwable, stackTrace);
-        return new Thrown(key, level, package_, class_, message, stackTrace);
+        return new Thrown(key, level, package_, class_, new ThrownMessage(Thread.currentThread().getName(), message, System.currentTimeMillis()), stackTrace);
     }
 
     private String key(String level, Throwable throwable, StackTraceElement[] stackTrace) {
@@ -139,6 +140,7 @@ public class LoggerSummary {
             return "MD5-failed-instance-hashcode=" + String.valueOf(throwable.hashCode());
         }
         md.update(level.getBytes());
+        md.update(throwable.getClass().getCanonicalName().getBytes());
         for (StackTraceElement stackFrame : stackTrace) {
             md.update(stackFrame.getClassName().getBytes());
             md.update(":".getBytes());
@@ -156,10 +158,9 @@ public class LoggerSummary {
         public String level;
         public String package_;
         public String class_;
-        public String message;
+        public List<ThrownMessage> messages;
         public StackTraceElement[] stackTrace;
         public LongAdder thrown;
-        public long timestamp = 0;
         public Map<String, Thrown> cause = new ConcurrentHashMap<>();
 
         public Thrown() {
@@ -167,24 +168,44 @@ public class LoggerSummary {
             this.level = null;
             this.package_ = null;
             this.class_ = null;
-            this.message = null;
+            this.messages = null;
             this.stackTrace = null;
             this.thrown = null;
         }
 
-        public Thrown(String key, String level, String package_, String class_, String message, StackTraceElement[] stackTrace) {
+        public Thrown(String key, String level, String package_, String class_, ThrownMessage message, StackTraceElement[] stackTrace) {
             this.key = key;
             this.level = level;
             this.package_ = package_;
             this.class_ = class_;
-            this.message = message;
+            this.messages = new CopyOnWriteArrayList<>();
+            this.messages.add(message);
             this.stackTrace = stackTrace;
             this.thrown = new LongAdder();
         }
 
-        public void increment() {
+        public void increment(ThrownMessage message) {
             thrown.increment();
-            timestamp = System.currentTimeMillis();
+            messages.add(message);
+            while (messages.size() > 100) {
+                messages.remove(0);
+            }
+        }
+    }
+
+    public static class ThrownMessage {
+        public String threadName;
+        public String message;
+        public long timestamp;
+
+        public ThrownMessage() {
+
+        }
+
+        public ThrownMessage(String threadName, String message, long timestamp) {
+            this.threadName = threadName;
+            this.message = message;
+            this.timestamp = timestamp;
         }
     }
 }
