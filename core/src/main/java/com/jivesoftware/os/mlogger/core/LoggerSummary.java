@@ -28,7 +28,6 @@ import java.util.concurrent.CopyOnWriteArrayList;
 import java.util.concurrent.atomic.LongAdder;
 
 /**
- *
  * @author jonathan
  */
 public class LoggerSummary {
@@ -74,7 +73,6 @@ public class LoggerSummary {
         errors.reset();
 
         thrown.clear();
-
     }
 
     private Map<String, Thrown> thrown = new ConcurrentHashMap<>(16, 0.75f, 64);
@@ -122,8 +120,8 @@ public class LoggerSummary {
     }
 
     public Thrown thrown(String level, Throwable throwable) {
-        String package_ =throwable.getClass().getPackage().getName();
-        String class_ =throwable.getClass().getSimpleName();
+        String package_ = throwable.getClass().getPackage().getName();
+        String class_ = throwable.getClass().getSimpleName();
 
         String message = throwable.getMessage();
         StackTraceElement[] stackTrace = throwable.getStackTrace();
@@ -132,7 +130,6 @@ public class LoggerSummary {
     }
 
     private String key(String level, Throwable throwable, StackTraceElement[] stackTrace) {
-
         MessageDigest md;
         try {
             md = MessageDigest.getInstance("MD5");
@@ -199,7 +196,6 @@ public class LoggerSummary {
         public long timestamp;
 
         public ThrownMessage() {
-
         }
 
         public ThrownMessage(String threadName, String message, long timestamp) {
