@@ -63,11 +63,7 @@ public class MetricLoggerFactory {
     static public MetricLogger getLogger(String name, boolean logsExternalInteractions) {
         MetricLogger got = serviceLoggers.get(name);
         if (got != null) {
-            got.debug("ServiceFactory is being called more that once for the same class:" + name);
-            StackTraceElement[] elements = Thread.currentThread().getStackTrace();
-            for (int i = 0; i < elements.length; i++) {
-                got.debug(i + " " + elements[i].getClassName());
-            }
+            got.warn("ServiceFactory is being called more that once for the same class:" + name);
             return got;
         }
         LoggerSummary loggerSummary = (logsExternalInteractions) ? LoggerSummary.INSTANCE_EXTERNAL_INTERACTIONS : LoggerSummary.INSTANCE;
